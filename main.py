@@ -11,9 +11,7 @@ Sky(texture='sky_default')
 boxes = []
 paused = False
 
-# --------------------
-# Pause Menu
-# --------------------
+# pause
 pause_menu = Entity(enabled=False)
 
 Text('Game Paused', parent=pause_menu, origin=(0, 0), y=0.1, scale=2)
@@ -34,9 +32,7 @@ Button(
     on_click=application.quit
 )
 
-# --------------------
-# Functions
-# --------------------
+# function
 def toggle_pause():
     global paused
     paused = not paused
@@ -49,9 +45,7 @@ def toggle_pause():
 def toggle_fullscreen():
     window.fullscreen = not window.fullscreen
 
-# --------------------
-# ONE input function ONLY
-# --------------------
+# input
 def input(key):
     if key == 'escape':
         toggle_pause()
@@ -63,7 +57,7 @@ def input(key):
         if mouse.hovered_entity:
             if key == 'left mouse down':
                 new_box = Button(
-                    color=color.white,
+                    color=color.green,
                     model='cube',
                     texture='white_cube',
                     position=mouse.hovered_entity.position + mouse.normal,
@@ -77,13 +71,11 @@ def input(key):
                 if mouse.hovered_entity in boxes:
                     boxes.remove(mouse.hovered_entity)
 
-# --------------------
-# Ground
-# --------------------
+# ground
 for x in range(20):
     for z in range(20):
         box = Button(
-            color=color.white,
+            color=color.green,
             model='cube',
             texture='white_cube',
             position=(x, 0, z),
@@ -91,5 +83,9 @@ for x in range(20):
             origin_y=0.5
         )
         boxes.append(box)
+        
+for box in boxes:
+    box.collider = 'box'
+
 
 app.run()
